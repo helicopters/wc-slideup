@@ -19,7 +19,7 @@
 .wc-slideup__content-wrapper {
 	display: none;
 	transform:translate3d(0, 100%, 0);
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	transition: all 222ms;
@@ -45,7 +45,6 @@
 	let addClass = (el, _class) => {
 		el.classList.add(_class);
 	}
-
 	let removeClass = (el, _class) => {
 		el.classList.remove(_class);
 	}
@@ -54,7 +53,9 @@
 			cb();
 		}, 50)	
 	}
-
+	let handler = (e) => {
+		e.preventDefault();
+	}
 	export default {
 		name: 'wcSlideup',
 		methods: {
@@ -66,10 +67,11 @@
 				addClass(this.$refs.content, 'wc-slideup__content-wrapper--show');
 				next(()=>{
 					addClass(this.$refs.content, 'wc-slideup__content-wrapper--diff');
-				});				
+				});		
+				document.body.addEventListener('touchmove', handler, false);
 			},
-
 			hide () {
+				document.body.removeEventListener('touchmove', handler, false);
 				/* 隐藏 mask */
 				removeClass(this.$refs.mask, 'wc-slideup__mask--diff');
 				let maskHandler = ()=>{

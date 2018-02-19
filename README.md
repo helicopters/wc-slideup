@@ -20,6 +20,8 @@ Vue.use(wcSlideup);
 
 ```
 
+
+## 使用
 ```shell
 1. 需要为 wc-slideup 添加 ref 属性
 2. 通过 this.$refs.slideup.show() 显示 slideup;
